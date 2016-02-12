@@ -1,0 +1,31 @@
+[
+	{
+		"name": "Greg",
+		"profession": "Programmer",
+		"age": 28
+	}, {
+		"name": "Kristina",
+		"profession": "Caretaker",
+		"age": 29
+	}, {
+		"name": "John",
+		"profession": "Asshole",
+		"age": 28
+	}, {
+		"name": "Sal",
+		"profession": "Restaurant Owner",
+		"age": 34
+	}, {
+		"name": "Joe",
+		"profession": "Realtor",
+		"age": 38
+	}, {
+		"name": "Murr",
+		"profession": "Attorney",
+		"age": 37
+	}, {
+		"name": "Q",
+		"profession": "Hobo",
+		"age": 36
+	}
+]

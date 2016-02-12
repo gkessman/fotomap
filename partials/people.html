@@ -1,0 +1,29 @@
+<div class="search pull-right">
+	<label for="nameText">Search:</label>
+	<input type="text" ng-model="nameText">
+</div>
+<br />
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Profession</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="person in people | filter:nameText | orderBy:'name'">
+			<td>{{ person.name }}</td>
+			<td>{{ person.age }}</td>
+			<td>{{ person.profession }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type="text" ng-model="model.name"></td>
+			<td><input type="text" ng-model="model.age"></td>
+			<td><input type="text" ng-model="model.profession"></td>
+			<td><button ng-click="save(model)" class="btn btn-primary">Save</button></td>
+		</tr>
+	</tbody>
+</table>
