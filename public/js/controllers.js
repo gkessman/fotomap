@@ -12,7 +12,7 @@ dataController.controller('DataController', ['$scope', '$http', function($scope,
 }]);
 
 projectsController.controller('ProjectsController', ['$scope', '$http', function($scope, $http) {
-	var marker;
+	var radius;
 
 	$scope.lat = 0;
 	$scope.lng = 0;
@@ -42,12 +42,20 @@ projectsController.controller('ProjectsController', ['$scope', '$http', function
 
 		console.log(loc);
 
-		if (marker) {
-			marker.setPosition(location);
+		if (radius) {
+			console.log("reset radius");
+			radius.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
 		} else {
-			marker = new google.maps.Marker({
-				position: location,
-				map: $scope.map
+			console.log("new radius");
+			radius = new google.maps.Circle({
+				strokeColor: '#FF0000',
+				strokeOpacity: 0.8,
+				strokeWeight: 1,
+				fillColor: '#FF0000',
+				fillOpacity: 0.35,
+				map: $scope.map,
+				center: new google.maps.LatLng(loc.lat, loc.lng),
+				radius: 500
 			});
 		}
 
@@ -66,12 +74,7 @@ projectsController.controller('ProjectsController', ['$scope', '$http', function
 			}
 		}).success(function(result) {
 			$scope.photos = result.data;
-			// renderPage($scope);
-			// $scope.$apply();
 		});
 	}
 
-	function renderPage($scope) {
-		$scope.$apply();
-	}
 }])
