@@ -1,0 +1,12 @@
+<div class="row-fluid">
+	<div class="col-md-12 view">
+		Lat: {{ lat }}
+		Lng: {{ lng }}
+		<div id="map"></div>
+		<div id="photos">
+			<ul class="g">
+				<li ng-repeat="photo in photos"><a href="#"><img src="{{photo.images.standard_resolution.url}}" alt="Product Name" /></a></li>
+			</ul>
+		</div>
+	</div>
+</div>

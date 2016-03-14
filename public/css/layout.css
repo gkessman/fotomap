@@ -6,6 +6,11 @@
 #photos {
 }
 
+.sideSettings {
+	background-color: gray;
+	height: 1200px;
+}
+
 .g {
 	padding: 0.25em;
 	overflow: hidden;
