@@ -6,9 +6,9 @@ dataController.controller('DataController', ['$scope', '$http', function($scope,
 		$scope.people = data;
 	});
 
-	$scope.save = function(model) {
-		$http.post('js/data/data.json', model);
-	}
+	// $scope.save = function(model) {
+	// 	$http.post('js/data/data.json', model);
+	// }
 }]);
 
 projectsController.controller('ProjectsController', ['$scope', '$http', function($scope, $http) {
