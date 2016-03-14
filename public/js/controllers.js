@@ -28,6 +28,7 @@ projectsController.controller('ProjectsController', ['$scope', '$http', function
 	google.maps.event.addListener($scope.map, 'click', function(event) {
 		placeMarker(event.latLng);
 		getPhotos(event.latLng);
+		$scope.$apply();
 	});
 
 	function placeMarker(location) {
@@ -58,12 +59,19 @@ projectsController.controller('ProjectsController', ['$scope', '$http', function
 		var lat = location.lat().toFixed(10);
 		var lng = location.lng().toFixed(10);
 
-		$http.get("https://api.instagram.com/v1/media/search?lat="+lat+"&lng="+lng+
-			"&distance=200&access_token=2259798362.1fb234f.b87adebc5dfd47f8a55adae001f63ca2").success(function(result) {
-				console.log(result);
-				$scope.photos = result.data;
-				$scope.$apply();
+		$http.get('/photos', {
+			params: {
+				lat: lat,
+				lng: lng
 			}
-		);
+		}).success(function(result) {
+			$scope.photos = result.data;
+			// renderPage($scope);
+			// $scope.$apply();
+		});
+	}
+
+	function renderPage($scope) {
+		$scope.$apply();
 	}
 }])
