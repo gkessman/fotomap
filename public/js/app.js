@@ -10,15 +10,15 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 
 	$routeProvider
 	.when('/', {
-		templateUrl: "partials/people.html",
-		controller: "DataController"
+		templateUrl: "partials/projects.html",
+		controller: "ProjectsController"
 	})
 	.when('/about', {
 		templateUrl: "partials/about.html"
 	})
-	.when('/projects', {
-		templateUrl: "partials/projects.html",
-		controller: "ProjectsController"
+	.when('/people', {
+		templateUrl: "partials/people.html",
+		controller: "DataController"
 	})
 	.otherwise({
 		redirectTo: '/'
