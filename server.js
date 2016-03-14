@@ -27,5 +27,5 @@ app.get('/photos', function(req, res) {
 });
 
 app.listen(port, function() {
-	console.log('Express server running on port + ' + port);
+	console.log('Express server running on port ' + port);
 });
