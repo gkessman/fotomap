@@ -31,13 +31,9 @@ projectsController.controller('ProjectsController', ['$scope', '$http', function
 		loc['lat'] = $scope.lat;
 		loc['lng'] = $scope.lng;
 
-		console.log(loc);
-
 		if (radius) {
-			console.log("reset radius");
 			radius.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
 		} else {
-			console.log("new radius");
 			radius = new google.maps.Circle({
 				strokeColor: '#FF0000',
 				strokeOpacity: 0.8,
