@@ -1,5 +1,5 @@
 {
-  "name": "ng-learn",
+  "name": "fotomap",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gkessman/ng-learn.git"
+    "url": "git+https://github.com/gkessman/fotomap.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gkessman/ng-learn/issues"
+    "url": "https://github.com/gkessman/fotomap/issues"
   },
-  "homepage": "https://github.com/gkessman/ng-learn#readme",
+  "homepage": "https://github.com/gkessman/fotomap#readme",
   "dependencies": {
     "express": "^4.13.4",
     "request": "^2.69.0"
