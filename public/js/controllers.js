@@ -1,15 +1,4 @@
-var dataController = angular.module('dataController', []);
 var projectsController = angular.module('projectsController', []);
-
-dataController.controller('DataController', ['$scope', '$http', function($scope, $http) {
-	$http.get('js/data/data.json').success(function(data) {
-		$scope.people = data;
-	});
-
-	// $scope.save = function(model) {
-	// 	$http.post('js/data/data.json', model);
-	// }
-}]);
 
 projectsController.controller('ProjectsController', ['$scope', '$http', function($scope, $http) {
 	var radius;
@@ -22,7 +11,9 @@ projectsController.controller('ProjectsController', ['$scope', '$http', function
 			lat: 40.7903,
 			lng: -73.9597
 		},
-		zoom: 10
+		zoom: 10,
+		mapTypeControl: false,
+		streetViewControl: false
 	});
 
 	google.maps.event.addListener($scope.map, 'click', function(event) {

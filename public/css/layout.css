@@ -3,12 +3,22 @@
 	width: auto;
 }
 
-#photos {
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
 }
 
 .sideSettings {
 	background-color: gray;
 	height: 1200px;
+}
+
+.indent {
+    text-indent: 50px;
+}
+
+ul li a {
+	font-size: 14px;
 }
 
 .g {
