@@ -15,7 +15,7 @@ app.get('/photos', function(req, res) {
 	var reqInfo = {}
 	var lat = req.query.lat;
 	var lng = req.query.lng;
-	reqInfo.ip = req.connection.remoteAddress;
+	reqInfo.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 	reqInfo.lat = lat;
 	reqInfo.lng = lng;
 	reqInfo.timestamp = new Date().toISOString();
