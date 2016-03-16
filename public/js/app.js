@@ -3,7 +3,7 @@ var app = angular.module('app', [
 	'projectsController'
 ]);
 
-app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+app.config(['$routeProvider', '$httpProvider', '$locationProvider', function($routeProvider, $httpProvider, $locationProvider) {
 
 	$httpProvider.defaults.useXDomain = true;
 
@@ -18,4 +18,6 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 	.otherwise({
 		redirectTo: '/'
 	})
+
+	$locationProvider.html5Mode(true);
 }]);
