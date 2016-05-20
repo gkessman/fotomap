@@ -17,7 +17,6 @@ app.get('/photos', function(req, res) {
 	var reqInfo = {};
 	var lat = req.query.lat;
 	var lng = req.query.lng;
-	console.log(req);
 	publicIp.v4().then(ip => {
 		reqInfo.ip = ip;
 		reqInfo.lat = lat;
