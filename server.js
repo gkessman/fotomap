@@ -14,6 +14,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/photos', function(req, res) {
+	console.log('ip address: ', req.connection.remoteAddress)
 	var reqInfo = {};
 	var lat = req.query.lat;
 	var lng = req.query.lng;
