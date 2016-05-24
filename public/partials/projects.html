@@ -1,10 +1,8 @@
 <div class="col-md-12 nopadding">
 	<div id="map"></div>
 	<div id="photos">
-		<div class="container" ng-show="!photos.length">
-			<div class="empty-image">
-				<p class="empty-text">No photos available. Click on an area of the map.</p>
-			</div>
+		<div class="empty-image" ng-show="!photos.length">
+			<p class="empty-text">No photos available. Click on an area of the map.</p>
 		</div>
 		<ul class="g">
 			<li ng-repeat="photo in photos"><img src="{{photo.images.standard_resolution.url}}" alt="Snap"/></li>

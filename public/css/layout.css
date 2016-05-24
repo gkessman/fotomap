@@ -33,17 +33,11 @@ html,body {
 	border-top: 1px solid #ccc;
 }
 
-.container {
-	height: inherit;
-	width: 100%;
-	text-align: center;
-}
-
 .empty-image {
 	background-image: url("../images/europe.png");
 	display: table;
 	height: inherit;
-	width: inherit;
+	width: 100%;
 	background-position: center -200px;
 }
 
