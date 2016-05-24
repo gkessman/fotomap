@@ -16,12 +16,14 @@ app.get('/photos', function(req, res) {
 	var reqInfo = {};
 	var lat = req.query.lat;
 	var lng = req.query.lng;
+	var rad = req.query.rad;
 	reqInfo.ip = req.connection.remoteAddress
 	reqInfo.lat = lat;
 	reqInfo.lng = lng;
+	reqInfo.rad = rad;
 	reqInfo.timestamp = new Date().toISOString();
 	console.log(reqInfo);
-	request('https://api.instagram.com/v1/media/search?lat=' + lat + '&lng=' + lng + '&distance=500&access_token=' + token,
+	request('https://api.instagram.com/v1/media/search?lat=' + lat + '&lng=' + lng + '&distance=' + rad + '&access_token=' + token,
 		function(error, response, body) {
 			res.send(body);
 		});
