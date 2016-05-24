@@ -1,20 +1,25 @@
 html,body {
 	font-family: 'Raleway', sans-serif;
+	/*overflow-x: hidden;*/
 }
 
 #map {
-	height: 500px;
-	width: auto;
+	height: 80vh;
+	width: 50%;
+	float: left;
+	padding-right: 5px;
+}
+
+#photos {
+	float: right;
+	width: 50%;
+	height: 80vh;
+	padding-left: 5px;
 }
 
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;
-}
-
-.sideSettings {
-	background-color: gray;
-	height: 1200px;
 }
 
 .indent {
@@ -28,9 +33,26 @@ html,body {
 	border-top: 1px solid #ccc;
 }
 
-.center {
+.container {
+	height: inherit;
+	width: 100%;
 	text-align: center;
-	padding-top: 1em;
+}
+
+.empty-image {
+	background-image: url("../images/europe.png");
+	display: table;
+	height: inherit;
+	width: inherit;
+	background-position: center -200px;
+}
+
+.empty-text {
+	display: table-cell;
+	color: white;
+	font-size: 18px;
+	text-align: center;
+	vertical-align: middle;
 }
 
 ul li a {
@@ -51,6 +73,11 @@ ul li a {
 }
 .g li:nth-child(odd) {
 	clear: left;
+}
+
+.g li:hover {
+/*	width: 100%;
+	position: absolute;*/
 }
 
 @media screen and (min-width: 40em) {
