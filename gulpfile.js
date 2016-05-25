@@ -1,6 +1,7 @@
 // Required
 
 var gulp = require('gulp'),
+	sass = require('gulp-sass'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
 	browserSync = require('browser-sync'),
@@ -16,6 +17,16 @@ gulp.task('scripts', function() {
 	.pipe(gulp.dest('public/js'));
 });
 
+// Compile SCSS
+
+gulp.task('styles', function () {
+  return gulp.src('public/scss/style.scss')
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(gulp.dest('public/css'));
+});
+
+// Reload Browser
+
 gulp.task('browser-sync', ['nodemon'], function() {
 	browserSync.init(null, {
 		proxy: "http://localhost:3000",
@@ -23,6 +34,8 @@ gulp.task('browser-sync', ['nodemon'], function() {
 		port: 7000
 	});
 });
+
+// Reload Node via Nodemon
 
 gulp.task('nodemon', function(cb) {
 	var started = false;
