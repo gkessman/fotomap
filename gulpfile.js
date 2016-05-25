@@ -1,3 +1,14 @@
+
+var config = { 
+	buildFilesFoldersRemove:[
+		'build/scss/', 
+		'build/js/!(*.min.js)',
+		'build/bower.json',
+		'build/bower_components/',
+		'build/images/*.xcf'
+	]
+};
+
 // Required
 
 var gulp = require('gulp'),
@@ -5,11 +16,12 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
 	browserSync = require('browser-sync'),
-	nodemon = require('gulp-nodemon');
+	nodemon = require('gulp-nodemon'),
+	del = require('del');
 
 // Script Tasks
 
-gulp.task('scripts', function() {
+gulp.task('js', function() {
 	// console.log('Hello world!');
 	gulp.src(['public/js/*.js', '!public/js/*.min.js'])
 	.pipe(rename({suffix:'.min'}))
@@ -22,7 +34,8 @@ gulp.task('scripts', function() {
 gulp.task('styles', function () {
   return gulp.src('public/scss/style.scss')
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('public/css'))
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 // Reload Browser
@@ -50,6 +63,36 @@ gulp.task('nodemon', function(cb) {
 	});
 });
 
+// Watch Task
+
+gulp.task('watch', function() {
+	gulp.watch('public/scss/*.scss', ['styles']);
+});
+
+
+// Build Tasks
+
+// clean out all files and folders from build folder
+gulp.task('build:clean', function (cb) {
+	del([
+		'build/**'
+	], cb());
+});
+
+// task to create build directory of all files
+gulp.task('build:copy', ['build:clean'], function(){
+    return gulp.src('public/**/*/')
+    .pipe(gulp.dest('build/'));
+});
+
+// task to removed unwanted build files
+// list all files and directories here that you don't want included
+gulp.task('build:remove', ['build:copy'], function (cb) {
+	del(config.buildFilesFoldersRemove, cb());
+});
+
+gulp.task('build', ['build:copy', 'build:remove']);
+
 // Default Task
 
-gulp.task('default', ['scripts', 'browser-sync']);
+gulp.task('default', ['js', 'styles', 'browser-sync', 'watch']);
