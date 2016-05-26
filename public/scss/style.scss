@@ -1,4 +1,4 @@
-$color_1: white;
+$color_2: white;
 $font-family_1: 'Raleway', sans-serif;
 
 @import 'bootstrap.min.css';
@@ -60,7 +60,7 @@ body {
 }
 .empty-text {
 	display: table-cell;
-	color: $color_1;
+	color: $color_2;
 	font-size: 18px;
 	text-align: center;
 	vertical-align: middle;

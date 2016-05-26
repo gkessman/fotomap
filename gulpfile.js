@@ -38,9 +38,16 @@ gulp.task('set-prod', function(cb) {
 	cb();
 });
 
+// Clean JS
+
+gulp.task('clean', function() {
+	del('./public/js/main.js');
+});
+
 // JS Tasks
 
 gulp.task('js', function() {
+	// del('./public/js/main.js');
 	gulp.src([
 		paths.vendor + '/angular/angular.min.js',
 		paths.vendor + '/angular-route/angular-route.min.js',
@@ -120,7 +127,8 @@ gulp.task('build-remove', function () {
 
 gulp.task('build', function(cb) {
 	runSeq('build-clean',
-			['js', 'styles'],
+			'js',
+			'styles',
 			'build-copy', 
 			'build-remove',
 			cb);
@@ -129,7 +137,9 @@ gulp.task('build', function(cb) {
 // Default Task
 
 gulp.task('default', function(cb) {
-	runSeq(['js', 'styles', 'set-dev'],
+	runSeq('clean',
+			'styles',
+			['js', 'set-dev'],
 			'browser-sync', 
 			'watch',
 			cb);
