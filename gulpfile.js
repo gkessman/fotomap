@@ -23,7 +23,20 @@ var gulp = require('gulp'),
 	nodemon = require('gulp-nodemon'),
 	del = require('del'),
 	concat = require('gulp-concat'),
-	remoteSrc = require('gulp-remote-src');
+	remoteSrc = require('gulp-remote-src'),
+	runSeq = require('run-sequence');
+
+// Set Node Environments
+
+gulp.task('set-dev', function(cb) {
+	process.env.NODE_ENV = 'development';
+	cb();
+});
+
+gulp.task('set-prod', function(cb) {
+	process.env.NODE_ENV = 'production';
+	cb();
+});
 
 // JS Tasks
 
@@ -35,25 +48,11 @@ gulp.task('js', function() {
 		'public/js/*.js', 
 		'!public/js/*.min.js',
 	])
-	// .pipe(rename({suffix:'.min'}))
 	.pipe(concat('main.js'))
 	.pipe(uglify())
 	.pipe(gulp.dest('./public/js'));
 });
 
-// Libs Tasks - concatenate js libraries
-
-// gulp.task('libs', function() {
-// 	return gulp.src([
-// 		paths.vendor + '/angular/angular.min.js',
-// 		paths.vendor + '/angular-route/angular-route.min.js',
-// 		paths.vendor + '/angularjs-slider/dist/rzslider.min.js',
-// 		'./public/js/app.min.js',
-// 		'./public/js/controllers.min.js',
-// 	])
-// 	.pipe(concat('main.js'))
-// 	.pipe(gulp.dest('./public/js/'));
-// });
 
 // Compile SCSS
 
@@ -98,27 +97,40 @@ gulp.task('watch', function() {
 
 // Build Tasks
 
+gulp.task('build-serve', ['set-prod', 'browser-sync']);
+
 // clean out all files and folders from build folder
-gulp.task('build:clean', function (cb) {
+gulp.task('build-clean', function () {
 	del([
 		'build/**'
-	], cb());
+	]);
 });
 
 // task to create build directory of all files
-gulp.task('build:copy', ['build:clean'], function(){
+gulp.task('build-copy', [], function(){
     return gulp.src('public/**/*/')
     .pipe(gulp.dest('build/'));
 });
 
 // task to removed unwanted build files
 // list all files and directories here that you don't want included
-gulp.task('build:remove', ['build:copy'], function (cb) {
-	del(config.buildFilesFoldersRemove, cb());
+gulp.task('build-remove', function () {
+	del(config.buildFilesFoldersRemove);
 });
 
-gulp.task('build', ['build:copy', 'build:remove']);
+gulp.task('build', function(cb) {
+	runSeq('build-clean',
+			['js', 'styles'],
+			'build-copy', 
+			'build-remove',
+			cb);
+});
 
 // Default Task
 
-gulp.task('default', ['js', 'styles', 'browser-sync', 'watch']);
+gulp.task('default', function(cb) {
+	runSeq(['js', 'styles', 'set-dev'],
+			'browser-sync', 
+			'watch',
+			cb);
+});
