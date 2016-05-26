@@ -2,7 +2,7 @@
 var config = { 
 	buildFilesFoldersRemove:[
 		'build/scss/', 
-		'build/js/!(main.js)',
+		'build/js/',
 		'build/bower.json',
 		'build/bower_components/',
 		'build/images/*.xcf'
@@ -40,14 +40,13 @@ gulp.task('set-prod', function(cb) {
 
 // Clean JS
 
-gulp.task('clean', function() {
-	del('./public/js/main.js');
+gulp.task('clean', function(cb) {
+	del(['./public/dist'], cb());
 });
 
 // JS Tasks
 
-gulp.task('js', function() {
-	// del('./public/js/main.js');
+gulp.task('js', ['clean'], function() {
 	gulp.src([
 		paths.vendor + '/angular/angular.min.js',
 		paths.vendor + '/angular-route/angular-route.min.js',
@@ -55,9 +54,11 @@ gulp.task('js', function() {
 		'public/js/*.js', 
 		'!public/js/*.min.js',
 	])
-	.pipe(concat('main.js'))
+	.pipe(concat('compiled-bundle.js'))
+	.pipe(gulp.dest('./public/dist'))
+	.pipe(rename("compiled-bundle.min.js"))
 	.pipe(uglify())
-	.pipe(gulp.dest('./public/js'));
+	.pipe(gulp.dest('./public/dist'));
 });
 
 
@@ -137,8 +138,7 @@ gulp.task('build', function(cb) {
 // Default Task
 
 gulp.task('default', function(cb) {
-	runSeq('clean',
-			'styles',
+	runSeq('styles',
 			['js', 'set-dev'],
 			'browser-sync', 
 			'watch',
