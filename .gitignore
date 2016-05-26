@@ -31,6 +31,9 @@ Thumbs.db
 ######################
 node_modules/
 public/bower_components/
+public/js/vendor
+public/js/main.js
+public/css
 .sass-cache
 *.css.map
 build/

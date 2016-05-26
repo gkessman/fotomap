@@ -2,12 +2,16 @@
 var config = { 
 	buildFilesFoldersRemove:[
 		'build/scss/', 
-		'build/js/!(*.min.js)',
+		'build/js/!(main.js)',
 		'build/bower.json',
 		'build/bower_components/',
 		'build/images/*.xcf'
 	]
 };
+
+var paths = {
+	'vendor': './public/js/vendor'
+}
 
 // Required
 
@@ -17,22 +21,44 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	browserSync = require('browser-sync'),
 	nodemon = require('gulp-nodemon'),
-	del = require('del');
+	del = require('del'),
+	concat = require('gulp-concat'),
+	remoteSrc = require('gulp-remote-src');
 
-// Script Tasks
+// JS Tasks
 
 gulp.task('js', function() {
-	// console.log('Hello world!');
-	gulp.src(['public/js/*.js', '!public/js/*.min.js'])
-	.pipe(rename({suffix:'.min'}))
+	gulp.src([
+		paths.vendor + '/angular/angular.min.js',
+		paths.vendor + '/angular-route/angular-route.min.js',
+		paths.vendor + '/angularjs-slider/dist/rzslider.min.js',
+		'public/js/*.js', 
+		'!public/js/*.min.js',
+	])
+	// .pipe(rename({suffix:'.min'}))
+	.pipe(concat('main.js'))
 	.pipe(uglify())
-	.pipe(gulp.dest('public/js'));
+	.pipe(gulp.dest('./public/js'));
 });
+
+// Libs Tasks - concatenate js libraries
+
+// gulp.task('libs', function() {
+// 	return gulp.src([
+// 		paths.vendor + '/angular/angular.min.js',
+// 		paths.vendor + '/angular-route/angular-route.min.js',
+// 		paths.vendor + '/angularjs-slider/dist/rzslider.min.js',
+// 		'./public/js/app.min.js',
+// 		'./public/js/controllers.min.js',
+// 	])
+// 	.pipe(concat('main.js'))
+// 	.pipe(gulp.dest('./public/js/'));
+// });
 
 // Compile SCSS
 
 gulp.task('styles', function () {
-  return gulp.src('public/scss/style.scss')
+  return gulp.src(['public/scss/style.scss', 'public/js/vendor/bootstrap/dist/css/bootstrap.min.css'])
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(gulp.dest('public/css'))
     .pipe(browserSync.reload({ stream: true }));
