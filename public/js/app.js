@@ -16,9 +16,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', function($ro
 	.when('/about', {
 		templateUrl: "partials/about.html"
 	})
+	.when('/privacy', {
+		templateUrl: "partials/privacy.html"
+	})
 	.otherwise({
 		redirectTo: '/'
 	})
 
-	$locationProvider.html5Mode(true);
+	// $locationProvider.html5Mode(true);
 }]);
