@@ -1,1 +1,24 @@
-var app=angular.module("app",["rzModule","ngRoute","projectsController"]);app.config(["$routeProvider","$httpProvider","$locationProvider",function(e,o,r){o.defaults.useXDomain=!0,e.when("/",{templateUrl:"partials/projects.html",controller:"ProjectsController"}).when("/about",{templateUrl:"partials/about.html"}).otherwise({redirectTo:"/"}),r.html5Mode(!0)}]);
+var app = angular.module('app', [
+	'rzModule',
+	'ngRoute',
+	'fotomapController'
+]);
+
+app.config(['$routeProvider', '$httpProvider', '$locationProvider', function($routeProvider, $httpProvider, $locationProvider) {
+
+	$httpProvider.defaults.useXDomain = true;
+
+	$routeProvider
+	.when('/', {
+		templateUrl: "partials/fotomap.html",
+		controller: "FotomapController"
+	})
+	.when('/about', {
+		templateUrl: "partials/about.html"
+	})
+	.otherwise({
+		redirectTo: '/'
+	})
+
+	$locationProvider.html5Mode(true);
+}]);

@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var app = express();
 var port = process.env.PORT || 3000;
 var path = '/public';
-var token = '<INSTAGRAM-API-ACCESS-TOKEN>';
+var token = '<INSTAGRAM_API_ACCESS_TOKEN>';
 
 if(process.env.NODE_ENV == 'production') {
 	path = '/build';
